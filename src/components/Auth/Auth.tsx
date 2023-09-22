@@ -6,9 +6,9 @@ export function Auth() {
   const pathname = useLocation().pathname;
 
   return (
-    <>
+    <div className='auth__container'>
       <AuthTitle pathname={pathname} />
       <AuthForm pathname={pathname} />
-    </>
+    </div>
   );
 }

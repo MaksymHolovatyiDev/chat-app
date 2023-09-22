@@ -22,7 +22,7 @@ const ignoreActions: any = [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER];
 
 export const store = configureStore({
   reducer: {
-    token: persistedReducer,
+    user: persistedReducer,
   },
 
   middleware: getDefaultMiddleware =>

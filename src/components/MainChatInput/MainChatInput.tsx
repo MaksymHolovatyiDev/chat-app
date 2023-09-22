@@ -19,6 +19,7 @@ export function MainChatInput() {
             </button>
 
             <Field
+              as="textarea"
               onChange={handleChange}
               onBlur={handleBlur}
               name="message"

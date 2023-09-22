@@ -3,11 +3,13 @@ import {MainRoutes} from '@/environment';
 import {Link} from 'react-router-dom';
 
 export function AuthTitle({pathname}: AuthProps) {
+  const SignUpPage = pathname === MainRoutes.SignUp;
+
   return (
     <div className="auth__title base__title">
       <Link
         className={`${
-          pathname === MainRoutes.SignIn && 'auth__title--decoration'
+          !SignUpPage && 'auth__title--decoration'
         } auth__title--inherit`}
         to={MainRoutes.SignIn}>
         Sign In
@@ -17,7 +19,7 @@ export function AuthTitle({pathname}: AuthProps) {
 
       <Link
         className={`${
-          pathname === MainRoutes.SignUp && 'auth__title--decoration'
+          SignUpPage && 'auth__title--decoration'
         } auth__title--inherit`}
         to={MainRoutes.SignUp}>
         Sign Up
