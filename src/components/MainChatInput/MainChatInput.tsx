@@ -1,15 +1,17 @@
+import {useSendMessageMutation} from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
-import {socket} from '@/Pages/Authorized';
 import {ReactSVG} from 'react-svg';
 
 export function MainChatInput() {
+  const [sendMessage] = useSendMessageMutation();
+
   return (
     <div className="main-chat-input">
       <Formik
         initialValues={{message: ''}}
-        onSubmit={async (values, {setSubmitting}) => {
-          if (values.message)
-            await socket.emit('message', {...values, socket: socket.id});
+        onSubmit={(values, {setSubmitting}) => {
+          sendMessage({...values, to: '65118efb9bbc5f3f2f6fd94d'});
+          values.message = '';
           setSubmitting(false);
         }}>
         {({handleBlur, handleChange, handleSubmit, isSubmitting}) => (

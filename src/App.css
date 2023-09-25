@@ -456,6 +456,7 @@
 
 .main-chat__list {
   display: flex;
+  flex-direction: column;
 
   flex-grow: 1;
 }
@@ -569,4 +570,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.main-chat__your-message {
+  align-self: flex-end;
+
+  color: #707c97;
+
+  padding: 14px 22px 17px;
+  border: 1px solid #707c9740;
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+}
+
+.main-chat__user-message {
+  align-self: flex-start;
+
+  background: linear-gradient(to right, #60a9f6, #2a8bf2);
+  color: white;
+
+  padding: 14px 22px 17px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  border-top-left-radius: 0;
 }

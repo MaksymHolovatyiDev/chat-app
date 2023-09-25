@@ -10,7 +10,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { userReducer } from './User/User';
+import {userReducer} from './User/User';
+import {backendAPI} from './operations';
 
 const persistConfig = {
   key: 'user',
@@ -22,6 +23,7 @@ const ignoreActions: any = [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER];
 
 export const store = configureStore({
   reducer: {
+    [backendAPI.reducerPath]: backendAPI.reducer,
     user: persistedReducer,
   },
 
@@ -30,7 +32,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoreActions,
       },
-    }),
+    }).concat(backendAPI.middleware),
 });
 
 export const persistor = persistStore(store);
