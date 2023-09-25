@@ -13,7 +13,7 @@ import {
 import { userReducer } from './User/User';
 
 const persistConfig = {
-  key: 'token',
+  key: 'user',
   storage,
 };
 

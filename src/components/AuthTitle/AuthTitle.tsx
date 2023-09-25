@@ -1,8 +1,9 @@
-import {AuthProps} from '@/Types';
+import {useLocation} from 'react-router-dom';
 import {MainRoutes} from '@/environment';
 import {Link} from 'react-router-dom';
 
-export function AuthTitle({pathname}: AuthProps) {
+export function AuthTitle() {
+  const {pathname} = useLocation();
   const SignUpPage = pathname === MainRoutes.SignUp;
 
   return (

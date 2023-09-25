@@ -1,4 +1,5 @@
 import {Field, Form, Formik} from 'formik';
+import {socket} from '@/Pages/Authorized';
 import {ReactSVG} from 'react-svg';
 
 export function MainChatInput() {
@@ -7,6 +8,8 @@ export function MainChatInput() {
       <Formik
         initialValues={{message: ''}}
         onSubmit={async (values, {setSubmitting}) => {
+          if (values.message)
+            await socket.emit('message', {...values, socket: socket.id});
           setSubmitting(false);
         }}>
         {({handleBlur, handleChange, handleSubmit, isSubmitting}) => (

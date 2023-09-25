@@ -1,20 +1,17 @@
 import '@/App.css';
-import {Routes, Route} from 'react-router-dom';
-import {Auth} from '@components/Auth/Auth';
-import {SidePanel} from './SidePanel/SidePanel';
-import {Chat} from './Chat/Chat';
+
+import {useSelector} from 'react-redux';
+import {getToken} from '@/Redux/User/User.selectors';
+import {UserAuth} from '@/Pages/UserAuth';
+import { Authorized } from '@/Pages/Authorized';
 
 function App() {
-  return (
-    // <div className="base-container">
-    //   <SidePanel />
-    //   <Routes>
-    //     <Route path="*" element={<Chat />} />
-    //   </Routes>
-    // </div>
-    <Routes>
-      <Route path="*" element={<Auth />} />
-    </Routes>
+  const token = useSelector(getToken);
+
+  return token ? (
+    <Authorized/>
+  ) : (
+    <UserAuth />
   );
 }
 

@@ -1,16 +1,17 @@
 import {Formik, Form, Field} from 'formik';
 import {MainRoutes, SignIn, SignUp} from '@/environment';
-import {AuthProps} from '@/Types';
+import {useLocation} from 'react-router-dom';
 import {userSignIn, userSignUp} from '@/Redux/operations';
 import {useDispatch} from 'react-redux';
 
-export function AuthForm({pathname}: AuthProps) {
+export function AuthForm() {
+  const {pathname} = useLocation();
   const authData = pathname === MainRoutes.SignUp ? SignUp : SignIn;
   const dispatch = useDispatch<any>();
 
   return (
     <Formik
-      initialValues={SignIn.initialValues}
+      initialValues={authData.initialValues}
       onSubmit={async (values, {setSubmitting}) => {
         pathname === MainRoutes.SignUp
           ? dispatch(userSignUp({...values}))

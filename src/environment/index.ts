@@ -1,3 +1,5 @@
+export const defaultUrl = 'http://localhost:4000';
+
 export enum MainRoutes {
   SignIn = '/SignIn',
   SignUp = '/SignUp',

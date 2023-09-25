@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import { defaultUrl } from '@/environment';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = defaultUrl+'/api';
 
 export const userSignIn = createAsyncThunk(
   'user/SignIn',
