@@ -3,9 +3,17 @@ import {ReactSVG} from 'react-svg';
 
 export function CreateNewChatSearch() {
   return (
-    <Formik initialValues={{message: ''}} onSubmit={async values => {}}>
+    <Formik
+      initialValues={{message: ''}}
+      onSubmit={async values => {
+        console.log(values);
+      }}>
       {({handleBlur, handleChange, handleSubmit}) => (
         <Form className="new-chat__form" onSubmit={handleSubmit}>
+          <ReactSVG
+            src="src/assets/search.svg"
+            className="side-panel___svg new-chat__svg"
+          />
           <Field
             onChange={handleChange}
             onBlur={handleBlur}

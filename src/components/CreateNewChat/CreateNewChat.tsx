@@ -1,9 +1,17 @@
+import {useState} from 'react';
 import {ReactSVG} from 'react-svg';
 import {CreateNewChatSearch} from '../CreateNewChatSearch/CreateNewChatSearch';
+import {ChatsList} from '../ChatsList/ChatsList';
+import {UsersListModal} from '../UsersListModal/UsersListModal';
 
 export function CreateNewChat() {
+  const [open, setOpen] = useState(false);
+  const onButtonClick = () => {
+    setOpen(true);
+  };
+
   return (
-    <div>
+    <div className="create-chat">
       <div className="create-chat__container">
         <div className="create-chat__container--text">
           <p className="create-chat__text">Chats</p>
@@ -15,12 +23,17 @@ export function CreateNewChat() {
             />
           </div>
         </div>
-        <button type="button" className="auth__button create-chat__button">
+        <button
+          type="button"
+          className="auth__button create-chat__button"
+          onClick={onButtonClick}>
           <ReactSVG src="src/assets/plus.svg" className="side-panel___svg" />
           Create New Chat
         </button>
       </div>
       <CreateNewChatSearch />
+      <ChatsList />
+      {open && <UsersListModal open={open} setOpen={setOpen} />}
     </div>
   );
 }

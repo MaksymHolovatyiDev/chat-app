@@ -1,44 +1,68 @@
 import {useEffect, useState} from 'react';
 import {socket} from '@/Pages/Authorized';
 import {MainChatInput} from '../MainChatInput/MainChatInput';
-import {Message} from '@/Types';
-import {useGetChatQuery} from '@/Redux/operations';
+import {Message, UsersData} from '@/Types';
+import {ChatHeaderButtons} from '../ChatHeaderButtons/ChatHeaderButtons';
+import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
+import {MainChatListItem} from '../MainChatListItem/MainChatListItem';
+import {useLazyGetChatByIdQuery} from '@/Redux/operations';
 import {useSelector} from 'react-redux';
+import {getChat} from '@/Redux/Chat/Chat.selectors';
 import {getId} from '@/Redux/User/User.selectors';
 
 export function MainChat() {
-  const [chat, setChat] = useState<Message[] | []>([]);
+  const [chatData, setChatData] = useState<Message[] | []>([]);
+  const [userData, setUserData] = useState<UsersData | null>(null);
+  const chatId = useSelector(getChat);
   const userId = useSelector(getId);
-  const {data, isSuccess} = useGetChatQuery('65118efb9bbc5f3f2f6fd94d');
+  const [getChatById, {data, isFetching}] = useLazyGetChatByIdQuery();
 
   useEffect(() => {
     socket.on('messageResponse', (data: any) => {
-      setChat(prevState => [...prevState, data]);
+      setChatData(prevState => [...prevState, data]);
     });
   }, []);
 
   useEffect(() => {
-    if (isSuccess) setChat(data.messages);
-  }, [isSuccess]);
+    if (chatId) getChatById(chatId);
+  }, [chatId]);
 
-  console.log(data);
+  useEffect(() => {
+    if (!isFetching && data) {
+      setChatData(data.messages);
+      setUserData(data.users[0]);
+    }
+  }, [isFetching]);
 
   return (
-    <div className="main-chat">
-      <ul className="main-chat__list">
-        {chat.map(el => (
-          <li
-            key={el._id}
-            className={`${
-              el.user === userId
-                ? 'main-chat__your-message'
-                : 'main-chat__user-message'
-            }`}>
-            <p>{el.text}</p>
-          </li>
-        ))}
-      </ul>
-      <MainChatInput />
-    </div>
+    userData &&
+    chatData && (
+      <div className="chat">
+        <div className="chat-header">
+          <UserChatProfile
+            online={userData.socketId}
+            name={userData.fullName}
+            lastOnline={userData.updatedAt}
+          />
+          <ChatHeaderButtons />
+        </div>
+        <div className="main-chat">
+          <ul className="main-chat__list">
+            {chatData.map(el => (
+              <li
+                key={el._id}
+                className={`${
+                  el.user === userId
+                    ? 'main-chat__your-message'
+                    : 'main-chat__user-message'
+                }`}>
+                <MainChatListItem data={el} userId={userId} />
+              </li>
+            ))}
+          </ul>
+          <MainChatInput />
+        </div>
+      </div>
+    )
   );
 }

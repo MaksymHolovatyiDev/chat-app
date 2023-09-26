@@ -3,7 +3,7 @@ import axios from 'axios';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {defaultUrl} from '@/environment';
-import {GetChatRes, SendMessageReq, SendMessageRes} from '@/Types';
+import {GetChatRes, SendMessageReq, SendMessageRes, UsersData} from '@/Types';
 
 axios.defaults.baseURL = defaultUrl + '/api';
 
@@ -30,9 +30,21 @@ export const backendAPI = createApi({
   reducerPath: 'backendAPI',
   baseQuery: baseQuery,
   endpoints: builder => ({
-    GetChat: builder.query<GetChatRes, string>({
+    GetChats: builder.query<GetChatRes[], void>({
+      query: () => ({
+        url: 'Chat',
+      }),
+    }),
+
+    GetChatById: builder.query<GetChatRes, string>({
       query: id => ({
         url: `Chat/${id}`,
+      }),
+    }),
+
+    GetAllUsers: builder.query<UsersData[], void>({
+      query: () => ({
+        url: 'Users',
       }),
     }),
 
@@ -67,4 +79,9 @@ export const userSignUp = createAsyncThunk(
   },
 );
 
-export const {useGetChatQuery, useSendMessageMutation} = backendAPI;
+export const {
+  useGetChatsQuery,
+  useGetAllUsersQuery,
+  useLazyGetChatByIdQuery,
+  useSendMessageMutation,
+} = backendAPI;

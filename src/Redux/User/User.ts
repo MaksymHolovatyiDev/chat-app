@@ -11,9 +11,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setToken: (state, {payload}) => {
-      state.token = payload;
-    },
     resetUser: () => initialState,
   },
   extraReducers: builder => {
@@ -31,4 +28,4 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const {setToken, resetUser} = userSlice.actions;
+export const { resetUser} = userSlice.actions;
