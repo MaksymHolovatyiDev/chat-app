@@ -6,9 +6,8 @@ import {MainChat} from '../MainChat/MainChat';
 import {useSelector} from 'react-redux';
 import {getChat} from '@/Redux/Chat/Chat.selectors';
 
-dayjs.extend(relativeTime);
-
 export function Chat() {
+  dayjs.extend(relativeTime);
   const chat = useSelector(getChat);
 
   return (
