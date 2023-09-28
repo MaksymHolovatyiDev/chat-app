@@ -1,4 +1,4 @@
-export const defaultUrl = 'http://localhost:4000';
+export const defaultUrl = 'https://chat-app-back-81ef9e6d09b6.herokuapp.com/';
 
 export enum MainRoutes {
   SignIn = '/SignIn',
