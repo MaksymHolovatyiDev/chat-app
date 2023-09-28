@@ -3,9 +3,14 @@ import {ReactSVG} from 'react-svg';
 import {CreateNewChatSearch} from '../CreateNewChatSearch/CreateNewChatSearch';
 import {ChatsList} from '../ChatsList/ChatsList';
 import {UsersListModal} from '../UsersListModal/UsersListModal';
+import {FindByMessageProps} from '@/Types';
 
 export function CreateNewChat() {
   const [open, setOpen] = useState(false);
+  const [messagesChats, setMessagesChats] = useState<
+    FindByMessageProps[] | [] | null
+  >(null);
+
   const onButtonClick = () => {
     setOpen(true);
   };
@@ -31,8 +36,8 @@ export function CreateNewChat() {
           Create New Chat
         </button>
       </div>
-      <CreateNewChatSearch />
-      <ChatsList />
+      <CreateNewChatSearch setMessagesChats={setMessagesChats} />
+      <ChatsList messagesChats={messagesChats} />
       {open && <UsersListModal open={open} setOpen={setOpen} />}
     </div>
   );

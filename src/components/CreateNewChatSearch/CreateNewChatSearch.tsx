@@ -1,12 +1,25 @@
+import {useEffect} from 'react';
+import {useLazyFindByMessageQuery} from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
 import {ReactSVG} from 'react-svg';
+import { CreateNewChatSearchProps } from '@/Types';
 
-export function CreateNewChatSearch() {
+export function CreateNewChatSearch({setMessagesChats}: CreateNewChatSearchProps) {
+  const [findChatsByMessage, {data, isSuccess}] = useLazyFindByMessageQuery();
+
+  useEffect(() => {
+    if (isSuccess && data) setMessagesChats(data);
+  }, [isSuccess]);
+
   return (
     <Formik
       initialValues={{message: ''}}
-      onSubmit={async values => {
-        console.log(values);
+      onSubmit={async ({message}) => {
+        if (message) {
+          findChatsByMessage(message);
+        } else {
+          setMessagesChats(null);
+        }
       }}>
       {({handleBlur, handleChange, handleSubmit}) => (
         <Form className="new-chat__form" onSubmit={handleSubmit}>

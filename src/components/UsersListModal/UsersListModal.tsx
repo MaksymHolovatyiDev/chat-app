@@ -1,7 +1,16 @@
+import {useEffect} from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {useGetAllUsersQuery} from '@/Redux/operations';
+import {
+  backendAPI,
+  useCreateNewChatMutation,
+  useGetAllUsersQuery,
+} from '@/Redux/operations';
+import {useDispatch, useSelector} from 'react-redux';
+import {getId} from '@/Redux/User/User.selectors';
+import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
+import {setChat} from '@/Redux/Chat/Chat';
+import {Notify} from 'notiflix';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -17,7 +26,35 @@ const style = {
 
 export function UsersListModal({open, setOpen}: any) {
   const {data, isSuccess} = useGetAllUsersQuery();
+  const dispatch = useDispatch();
+  const userId = useSelector(getId);
+
+  const [
+    createChat,
+    {data: createChatData, isSuccess: createChatSuccess, isError},
+  ] = useCreateNewChatMutation();
+
   const handleClose = () => setOpen(false);
+  const onListItemClick = (chatUserId: string) => {
+    createChat({chatUserId});
+  };
+
+  useEffect(() => {
+    if (createChatSuccess && createChatData) {
+      dispatch(backendAPI.util.invalidateTags(['Chats']));
+      dispatch(setChat(createChatData._id));
+      setOpen(false);
+    }
+  }, [createChatSuccess]);
+
+  useEffect(() => {
+    if (isError)
+      Notify.failure('Chat already exist!', {
+        clickToClose: true,
+        timeout: 2000,
+      });
+  }, [isError]);
+
   return (
     <div>
       <Modal
@@ -25,7 +62,27 @@ export function UsersListModal({open, setOpen}: any) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <Box sx={style}>{isSuccess && data && data.map(el => <li></li>)}</Box>
+        <Box sx={style}>
+          <ul className="modal-list">
+            {isSuccess &&
+              data &&
+              data.map(
+                el =>
+                  el._id !== userId && (
+                    <li
+                      key={el._id}
+                      className="modal-list__item"
+                      onClick={() => onListItemClick(el._id)}>
+                      <UserChatProfile
+                        online={el.socketId}
+                        name={el.fullName}
+                        lastOnline={el.updatedAt}
+                      />
+                    </li>
+                  ),
+              )}
+          </ul>
+        </Box>
       </Modal>
     </div>
   );

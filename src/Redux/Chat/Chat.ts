@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const chatSlice = createSlice({
-  name: 'user',
+  name: 'chat',
   initialState: '',
   reducers: {
     setChat: (_, {payload}) => payload,

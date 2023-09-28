@@ -2,7 +2,7 @@ import {useSendMessageMutation} from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
 import {ReactSVG} from 'react-svg';
 
-export function MainChatInput() {
+export function MainChatInput({id}: {id: string}) {
   const [sendMessage] = useSendMessageMutation();
 
   return (
@@ -10,7 +10,7 @@ export function MainChatInput() {
       <Formik
         initialValues={{message: ''}}
         onSubmit={(values, {setSubmitting}) => {
-          sendMessage({...values, to: '65118efb9bbc5f3f2f6fd94d'});
+          sendMessage({...values, to: id});
           values.message = '';
           setSubmitting(false);
         }}>

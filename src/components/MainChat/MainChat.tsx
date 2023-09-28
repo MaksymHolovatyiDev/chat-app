@@ -52,7 +52,7 @@ export function MainChat() {
               <li
                 key={el._id}
                 className={`${
-                  el.user === userId
+                  el.owner === userId
                     ? 'main-chat__your-message'
                     : 'main-chat__user-message'
                 }`}>
@@ -60,7 +60,7 @@ export function MainChat() {
               </li>
             ))}
           </ul>
-          <MainChatInput />
+          <MainChatInput id={userData._id} />
         </div>
       </div>
     )

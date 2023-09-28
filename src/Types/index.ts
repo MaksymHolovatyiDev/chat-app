@@ -1,8 +1,10 @@
 export interface Message {
   _id: string;
   text: string;
-  user: string;
+  owner: string;
   createdAt: string;
+  delivered: boolean;
+  read: boolean;
 }
 
 export interface UsersData {
@@ -32,4 +34,30 @@ export interface UserChatProfileProps {
   name: string;
   lastOnline: string;
   selected?: boolean;
+}
+
+export interface CreateNewChatReq {
+  chatUserId: string;
+}
+
+export interface CreateNewChatSearchProps {
+  setMessagesChats: (data: FindByMessageProps[] | [] | null) => void;
+}
+
+export interface ChatsListProps {
+  messagesChats: FindByMessageProps[] | [] | null;
+}
+
+export interface ChatListItemProps {
+  _id: string;
+  user: UsersData;
+  messages: {text: string; createdAt: string};
+}
+
+export interface FindByMessageProps {
+  _id: string;
+  chatId: string;
+  owner: UsersData;
+  text: string;
+  createdAt: string;
 }
