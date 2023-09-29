@@ -1,8 +1,9 @@
-import { resetUser } from '@/Redux/User/User';
+import {resetUser} from '@/Redux/User/User';
 import {MainRoutes, navigationData} from '@/environment';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {ReactSVG} from 'react-svg';
+import LogOutSvg from '@assets/power.svg';
 
 export function SidePanelNavigation() {
   const pathname = useLocation().pathname;
@@ -10,7 +11,7 @@ export function SidePanelNavigation() {
 
   const onLogOutClick = () => {
     dispatch(resetUser());
-  }
+  };
 
   return (
     <div className="side-panel__navigation">
@@ -38,7 +39,7 @@ export function SidePanelNavigation() {
         to={MainRoutes.SignIn}
         onClick={onLogOutClick}
         className="side-panel__link side-panel__link--margin-top">
-        <ReactSVG src="src/assets/power.svg" className="side-panel___svg " />
+        <ReactSVG src={LogOutSvg} className="side-panel___svg " />
         <p className="side-panel__text">Log out</p>
       </Link>
     </div>

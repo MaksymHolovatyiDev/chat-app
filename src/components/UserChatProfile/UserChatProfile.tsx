@@ -1,5 +1,6 @@
 import {UserChatProfileProps} from '@/Types';
 import dayjs from 'dayjs';
+import UserAvatar from '@assets/user.webp';
 
 export function UserChatProfile({
   online,
@@ -12,7 +13,7 @@ export function UserChatProfile({
       <div className="chat-list-item__container--relative">
         <img
           className="chat-header__user-image"
-          src="src/assets/user.webp"
+          src={UserAvatar}
           alt="User avatar."
         />
         {online && <div className="chat-list-item__online" />}

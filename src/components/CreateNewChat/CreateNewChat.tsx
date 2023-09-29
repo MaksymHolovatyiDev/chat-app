@@ -4,6 +4,8 @@ import {CreateNewChatSearch} from '../CreateNewChatSearch/CreateNewChatSearch';
 import {ChatsList} from '../ChatsList/ChatsList';
 import {UsersListModal} from '../UsersListModal/UsersListModal';
 import {FindByMessageProps} from '@/Types';
+import ChevronSvg from '@assets/chevron-down.svg';
+import PlusSvg from '@assets/plus.svg';
 
 export function CreateNewChat() {
   const [open, setOpen] = useState(false);
@@ -23,7 +25,7 @@ export function CreateNewChat() {
           <div className="create-chat__container--sub-text">
             <p className="create-chat__sub-text">Recent Chats</p>
             <ReactSVG
-              src="src/assets/chevron-down.svg"
+              src={ChevronSvg}
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent chevron-down__svg--gray"
             />
           </div>
@@ -32,7 +34,7 @@ export function CreateNewChat() {
           type="button"
           className="auth__button create-chat__button"
           onClick={onButtonClick}>
-          <ReactSVG src="src/assets/plus.svg" className="side-panel___svg" />
+          <ReactSVG src={PlusSvg} className="side-panel___svg" />
           Create New Chat
         </button>
       </div>

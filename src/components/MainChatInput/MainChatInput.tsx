@@ -1,6 +1,9 @@
 import {useSendMessageMutation} from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
 import {ReactSVG} from 'react-svg';
+import PlusSvg from '@assets/plus.svg';
+import SmileSvg from '@assets/Smile.svg';
+import NavigationSvg from '@assets/navigation.svg';
 
 export function MainChatInput({id}: {id: string}) {
   const [sendMessage] = useSendMessageMutation();
@@ -17,10 +20,7 @@ export function MainChatInput({id}: {id: string}) {
         {({handleBlur, handleChange, handleSubmit, isSubmitting}) => (
           <Form className="main-chat-input__form" onSubmit={handleSubmit}>
             <button type="button" className="main-chat-input__button">
-              <ReactSVG
-                src="src/assets/plus.svg"
-                className="side-panel___svg"
-              />
+              <ReactSVG src={PlusSvg} className="side-panel___svg" />
             </button>
 
             <Field
@@ -37,7 +37,7 @@ export function MainChatInput({id}: {id: string}) {
               type="button"
               className="main-chat-input__button main-chat-input__button--transparent">
               <ReactSVG
-                src="src/assets/Smile.svg"
+                src={SmileSvg}
                 className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent"
               />
             </button>
@@ -47,7 +47,7 @@ export function MainChatInput({id}: {id: string}) {
               className="main-chat-input__button"
               disabled={isSubmitting}>
               <ReactSVG
-                src="src/assets/navigation.svg"
+                src={NavigationSvg}
                 className="side-panel___svg main-chat-input___submit"
               />
             </button>

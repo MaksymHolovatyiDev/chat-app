@@ -2,9 +2,13 @@ import {useEffect} from 'react';
 import {useLazyFindByMessageQuery} from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
 import {ReactSVG} from 'react-svg';
-import { CreateNewChatSearchProps } from '@/Types';
+import {CreateNewChatSearchProps} from '@/Types';
+import ChevronSvg from '@assets/chevron-down.svg';
+import SearchSvg from '@assets/search.svg';
 
-export function CreateNewChatSearch({setMessagesChats}: CreateNewChatSearchProps) {
+export function CreateNewChatSearch({
+  setMessagesChats,
+}: CreateNewChatSearchProps) {
   const [findChatsByMessage, {data, isSuccess}] = useLazyFindByMessageQuery();
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export function CreateNewChatSearch({setMessagesChats}: CreateNewChatSearchProps
       {({handleBlur, handleChange, handleSubmit}) => (
         <Form className="new-chat__form" onSubmit={handleSubmit}>
           <ReactSVG
-            src="src/assets/search.svg"
+            src={SearchSvg}
             className="side-panel___svg new-chat__svg"
           />
           <Field
@@ -41,7 +45,7 @@ export function CreateNewChatSearch({setMessagesChats}: CreateNewChatSearchProps
             className="main-chat-input__button main-chat-input__button--transparent new-chat__button">
             Messages{' '}
             <ReactSVG
-              src="src/assets/chevron-down.svg"
+              src={ChevronSvg}
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent chevron-down__svg--gray"
             />
           </button>

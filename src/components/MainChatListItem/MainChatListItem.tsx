@@ -2,6 +2,9 @@ import dayjs from 'dayjs';
 
 import {Message} from '@/Types';
 import {ReactSVG} from 'react-svg';
+import UserAvatar from '@assets/user.webp';
+import DoneSvg from '@assets/all-done.svg';
+import CheckmarkSvg from '@assets/checkmark.svg';
 
 export function MainChatListItem({
   data,
@@ -21,7 +24,7 @@ export function MainChatListItem({
         {data.owner !== userId && (
           <img
             className="main-chat__image"
-            src="src/assets/user.webp"
+            src={UserAvatar}
             alt="User avatar."
           />
         )}
@@ -36,12 +39,12 @@ export function MainChatListItem({
         {data.owner === userId &&
           (data.read ? (
             <ReactSVG
-              src="src/assets/all-done.svg"
+              src={DoneSvg}
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent"
             />
           ) : (
             <ReactSVG
-              src="src/assets/checkmark.svg"
+              src={CheckmarkSvg}
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent"
             />
           ))}

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import * as relativeTime from 'dayjs/plugin/relativeTime';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import {CreateNewChat} from '../CreateNewChat/CreateNewChat';
 import {MainChat} from '../MainChat/MainChat';

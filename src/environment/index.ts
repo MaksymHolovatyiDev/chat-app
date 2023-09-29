@@ -1,3 +1,10 @@
+import GridSvg from '@assets/grid.svg';
+import ChatSvg from '@assets/chat.svg';
+import PersonSvg from '@assets/person.svg';
+import BellSvg from '@assets/bell.svg';
+import CalendarSvg from '@assets/calendar.svg';
+import SettingsSvg from '@assets/settings.svg';
+
 export const defaultUrl = 'https://chat-app-back-81ef9e6d09b6.herokuapp.com';
 
 export enum MainRoutes {
@@ -30,25 +37,23 @@ export const SignUp = {
   buttonText: 'Sign Up',
 };
 
-const svgRoute = 'src/assets/';
-
 export const navigationData = [
-  {text: 'Home', route: MainRoutes.Home, img: svgRoute + 'grid.svg'},
-  {text: 'Chat', route: MainRoutes.Chat, img: svgRoute + 'chat.svg'},
-  {text: 'Contact', route: MainRoutes.Contact, img: svgRoute + 'person.svg'},
+  {text: 'Home', route: MainRoutes.Home, img: GridSvg},
+  {text: 'Chat', route: MainRoutes.Chat, img: ChatSvg},
+  {text: 'Contact', route: MainRoutes.Contact, img: PersonSvg},
   {
     text: 'Notifications',
     route: MainRoutes.Notifications,
-    img: svgRoute + 'bell.svg',
+    img: BellSvg,
   },
   {
     text: 'Calendar',
     route: MainRoutes.Calendar,
-    img: svgRoute + 'calendar.svg',
+    img: CalendarSvg,
   },
   {
     text: 'Settings',
     route: MainRoutes.Settings,
-    img: svgRoute + 'settings.svg',
+    img: SettingsSvg,
   },
 ];

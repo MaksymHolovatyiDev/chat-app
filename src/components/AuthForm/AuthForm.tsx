@@ -30,6 +30,8 @@ export function AuthForm() {
                   name={el.field}
                   placeholder={el.text}
                   type={el.type}
+                  minLength={el.type === 'password' ? '6' : ''}
+                  required
                 />
               </li>
             ))}
