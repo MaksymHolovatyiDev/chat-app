@@ -34,7 +34,7 @@ export function MainChatListItem({
           {data.text}
         </p>
         {data.owner === userId &&
-          (data.delivered ? (
+          (data.read ? (
             <ReactSVG
               src="src/assets/all-done.svg"
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent"

@@ -472,6 +472,7 @@
   padding: 15px 60px;
 
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .create-chat {

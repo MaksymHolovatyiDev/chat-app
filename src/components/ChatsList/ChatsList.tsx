@@ -1,11 +1,19 @@
 import {useState, useEffect} from 'react';
-import {useGetChatsQuery} from '@/Redux/operations';
+import {useLazyGetChatsQuery} from '@/Redux/operations';
 import {ChatsListProps, GetChatRes} from '@/Types';
 import {ChatListItem} from '../ChatsListItem/ChatListItem';
+import {socket} from '@/Pages/Authorized';
 
 export function ChatsList({messagesChats}: ChatsListProps) {
   const [chats, setChats] = useState<GetChatRes[] | []>([]);
-  const {data, isFetching} = useGetChatsQuery();
+  const [getData, {data, isFetching}] = useLazyGetChatsQuery();
+
+  useEffect(() => {
+    socket.on('read', () => {
+      getData();
+    });
+    getData();
+  }, []);
 
   useEffect(() => {
     if (!isFetching && data) setChats(data);
@@ -25,6 +33,8 @@ export function ChatsList({messagesChats}: ChatsListProps) {
                 _id={el._id}
                 user={el.users[0]}
                 messages={el.messages[0]}
+                unreadMessages={el.unreadMessages}
+                unreadUser={el.unreadUser}
               />
             </li>
           ))}

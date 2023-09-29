@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {socket} from '@/Pages/Authorized';
 import {MainChatInput} from '../MainChatInput/MainChatInput';
 import {Message, UsersData} from '@/Types';
@@ -11,6 +11,7 @@ import {getChat} from '@/Redux/Chat/Chat.selectors';
 import {getId} from '@/Redux/User/User.selectors';
 
 export function MainChat() {
+  const chatList = useRef<any>(null);
   const [chatData, setChatData] = useState<Message[] | []>([]);
   const [userData, setUserData] = useState<UsersData | null>(null);
   const chatId = useSelector(getChat);
@@ -20,6 +21,9 @@ export function MainChat() {
   useEffect(() => {
     socket.on('messageResponse', (data: any) => {
       setChatData(prevState => [...prevState, data]);
+    });
+    socket.on('read', () => {
+      if (chatId) getChatById(chatId);
     });
   }, []);
 
@@ -34,6 +38,11 @@ export function MainChat() {
     }
   }, [isFetching]);
 
+  useEffect(() => {
+    if (chatList.current)
+      chatList.current.scrollTop = chatList.current.scrollHeight;
+  }, [chatData]);
+
   return (
     userData &&
     chatData && (
@@ -47,7 +56,7 @@ export function MainChat() {
           <ChatHeaderButtons />
         </div>
         <div className="main-chat">
-          <ul className="main-chat__list">
+          <ul className="main-chat__list" ref={chatList}>
             {chatData.map(el => (
               <li
                 key={el._id}

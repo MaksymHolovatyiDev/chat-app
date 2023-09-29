@@ -18,6 +18,8 @@ export interface GetChatRes {
   _id: string;
   messages: Message[];
   users: UsersData[];
+  unreadMessages: number;
+  unreadUser: string;
 }
 
 export interface SendMessageReq {
@@ -52,6 +54,8 @@ export interface ChatListItemProps {
   _id: string;
   user: UsersData;
   messages: {text: string; createdAt: string};
+  unreadMessages?: number;
+  unreadUser?: string;
 }
 
 export interface FindByMessageProps {

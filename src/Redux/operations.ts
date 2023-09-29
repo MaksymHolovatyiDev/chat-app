@@ -103,9 +103,9 @@ export const userSignUp = createAsyncThunk(
 );
 
 export const {
-  useGetChatsQuery,
   useGetAllUsersQuery,
   useLazyGetChatByIdQuery,
+  useLazyGetChatsQuery,
   useLazyFindByMessageQuery,
   useSendMessageMutation,
   useCreateNewChatMutation,

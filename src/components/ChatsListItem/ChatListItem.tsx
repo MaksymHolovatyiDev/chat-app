@@ -5,8 +5,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
 import {setChat} from '@/Redux/Chat/Chat';
 import {getChat} from '@/Redux/Chat/Chat.selectors';
+import {getId} from '@/Redux/User/User.selectors';
 
-export function ChatListItem({_id, messages, user}: ChatListItemProps) {
+export function ChatListItem({
+  _id,
+  messages,
+  user,
+  unreadMessages,
+  unreadUser,
+}: ChatListItemProps) {
+  const userId = useSelector(getId);
   const dispatch = useDispatch();
   const chat = useSelector(getChat);
   const selected = chat === _id;
@@ -42,11 +50,13 @@ export function ChatListItem({_id, messages, user}: ChatListItemProps) {
             {messages.text}
           </p>
         )}
-        {/* <div className="chat-list-item__new-message">
-          <p className="chat-list-item__text--line-height chat-list-item__new-message--text">
-            1
-          </p>
-        </div> */}
+        {!!unreadMessages && unreadUser === userId && (
+          <div className="chat-list-item__new-message">
+            <p className="chat-list-item__text--line-height chat-list-item__new-message--text">
+              {unreadMessages}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
