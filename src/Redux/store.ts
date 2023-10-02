@@ -12,7 +12,9 @@ import {
 } from 'redux-persist';
 import {userReducer} from './User/User';
 import {backendAPI} from './operations';
-import { chatReducer } from './Chat/Chat';
+import {chatReducer} from './Chat/Chat';
+import {editReducer} from './Edit/Edit';
+import {replyReducer} from './Reply/Reply';
 
 const persistConfig = {
   key: 'user',
@@ -27,6 +29,8 @@ export const store = configureStore({
     [backendAPI.reducerPath]: backendAPI.reducer,
     user: persistedReducer,
     chat: chatReducer,
+    edit: editReducer,
+    reply: replyReducer,
   },
 
   middleware: getDefaultMiddleware =>

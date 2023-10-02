@@ -7,8 +7,10 @@ import {
   CreateNewChatReq,
   FindByMessageProps,
   GetChatRes,
+  Message,
   SendMessageReq,
   SendMessageRes,
+  UpdateMessageReq,
   UsersData,
 } from '@/Types';
 
@@ -73,9 +75,24 @@ export const backendAPI = createApi({
       }),
     }),
 
-    FindByMessage: builder.query < FindByMessageProps[], string>({
-      query: (text) => ({
+    FindByMessage: builder.query<FindByMessageProps[], string>({
+      query: text => ({
         url: `Chat/message/${text}`,
+      }),
+    }),
+
+    UpdateMessage: builder.mutation<Message, UpdateMessageReq>({
+      query: body => ({
+        url: 'Message',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    DeleteMessage: builder.mutation<Message, string>({
+      query: id => ({
+        url: `Message/${id}`,
+        method: 'DELETE',
       }),
     }),
   }),
@@ -109,4 +126,6 @@ export const {
   useLazyFindByMessageQuery,
   useSendMessageMutation,
   useCreateNewChatMutation,
+  useUpdateMessageMutation,
+  useDeleteMessageMutation,
 } = backendAPI;

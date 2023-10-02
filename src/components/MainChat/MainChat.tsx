@@ -9,6 +9,7 @@ import {useLazyGetChatByIdQuery} from '@/Redux/operations';
 import {useSelector} from 'react-redux';
 import {getChat} from '@/Redux/Chat/Chat.selectors';
 import {getId} from '@/Redux/User/User.selectors';
+import {Reply} from '../Reply/Reply';
 
 export function MainChat() {
   const chatList = useRef<any>(null);
@@ -69,6 +70,7 @@ export function MainChat() {
               </li>
             ))}
           </ul>
+          <Reply />
           <MainChatInput id={userData._id} />
         </div>
       </div>

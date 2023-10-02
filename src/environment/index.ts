@@ -5,7 +5,8 @@ import BellSvg from '@assets/bell.svg';
 import CalendarSvg from '@assets/calendar.svg';
 import SettingsSvg from '@assets/settings.svg';
 
-export const defaultUrl = 'https://chat-app-back-81ef9e6d09b6.herokuapp.com';
+// export const defaultUrl = 'https://chat-app-back-81ef9e6d09b6.herokuapp.com';
+export const defaultUrl = 'http://localhost:4000';
 
 export enum MainRoutes {
   SignIn = '/SignIn',

@@ -5,6 +5,7 @@ export interface Message {
   createdAt: string;
   delivered: boolean;
   read: boolean;
+  reply: string[];
 }
 
 export interface UsersData {
@@ -25,6 +26,7 @@ export interface GetChatRes {
 export interface SendMessageReq {
   to: string;
   message: string;
+  reply: string[];
 }
 
 export interface SendMessageRes {
@@ -64,4 +66,9 @@ export interface FindByMessageProps {
   owner: UsersData;
   text: string;
   createdAt: string;
+}
+
+export interface UpdateMessageReq {
+  messageId: string;
+  text: string;
 }
