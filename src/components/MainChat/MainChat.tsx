@@ -20,15 +20,9 @@ export function MainChat() {
   const [getChatById, {data, isFetching}] = useLazyGetChatByIdQuery();
 
   useEffect(() => {
-    socket.on('messageResponse', (data: any) => {
-      setChatData(prevState => [...prevState, data]);
-    });
     socket.on('read', () => {
       if (chatId) getChatById(chatId);
     });
-  }, []);
-
-  useEffect(() => {
     if (chatId) getChatById(chatId);
   }, [chatId]);
 

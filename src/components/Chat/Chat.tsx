@@ -9,7 +9,6 @@ import {getChat} from '@/Redux/Chat/Chat.selectors';
 export function Chat() {
   dayjs.extend(relativeTime);
   const chat = useSelector(getChat);
-
   return (
     <div className="chat-wrapper">
       <CreateNewChat />

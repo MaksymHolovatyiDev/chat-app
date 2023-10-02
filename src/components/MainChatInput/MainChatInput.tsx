@@ -35,7 +35,6 @@ export function MainChatInput({id}: {id: string}) {
       <Formik
         initialValues={{message}}
         onSubmit={(values, {setSubmitting}) => {
-          console.log(values);
           if (edit.editId) {
             if (values.message && values.message !== edit.text)
               updateMessage({text: values.message, messageId: edit.editId});
