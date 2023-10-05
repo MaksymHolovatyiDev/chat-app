@@ -95,13 +95,6 @@ export const backendAPI = createApi({
         method: 'DELETE',
       }),
     }),
-
-    getMessageImage: builder.query<any, string>({
-      query: id => ({
-        url: `Message/image/${id}`,
-        responseHandler: 'content-type',
-      }),
-    }),
   }),
 });
 
@@ -132,7 +125,6 @@ export const {
   useLazyGetChatsQuery,
   useLazyFindByMessageQuery,
   useLazyDeleteMessageQuery,
-  useLazyGetMessageImageQuery,
   useSendMessageMutation,
   useCreateNewChatMutation,
   useUpdateMessageMutation,

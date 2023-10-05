@@ -11,8 +11,8 @@ import CheckmarkSvg from '@assets/icons/checkmark.svg';
 import {More} from '../More/More';
 import {useDispatch} from 'react-redux';
 import {setReply} from '@/Redux/Reply/Reply';
-import {useLazyGetMessageImageQuery} from '@/Redux/operations';
-import {useEffect} from 'react';
+
+const defaultUrl = import.meta.env.VITE_DEFAULT_URL;
 
 export function MainChatListItem({
   data,
@@ -21,20 +21,12 @@ export function MainChatListItem({
   data: Message;
   userId: string;
 }) {
-  const [
-    getImageById,
-    {data: imageData, isLoading, isSuccess, isError, error},
-  ] = useLazyGetMessageImageQuery();
   const dispatch = useDispatch();
   const isOwner = data.owner === userId;
 
   const onReplyClick = () => {
     dispatch(setReply({id: data._id, text: data.text}));
   };
-
-  useEffect(() => {
-    if (data.image) getImageById(data.image);
-  }, []);
 
   return (
     <>
@@ -61,9 +53,17 @@ export function MainChatListItem({
         )}
 
         {isOwner && <More id={data._id} text={data.text} />}
-        <div>
-          {isSuccess && imageData && (
-            <img src={`data:image/*;base64, ${imageData}`} alt="Chat image" />
+        <div
+          className={`main-chat__text-container ${
+            !isOwner && 'main-chat__text-container--transparent'
+          }`}>
+          {data.image && (
+            <img
+              className="main-chat__image--width"
+              src={`${defaultUrl}/api/Message/image/${data.image}`}
+              alt="Chat image"
+              loading="lazy"
+            />
           )}
           <p
             className={`chat__text ${
