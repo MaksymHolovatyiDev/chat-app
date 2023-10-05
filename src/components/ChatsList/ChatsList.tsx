@@ -1,11 +1,12 @@
-import {useState, useEffect} from 'react';
+import './ChatList.styled.css';
+
+import {useEffect} from 'react';
 import {useLazyGetChatsQuery} from '@/Redux/operations';
-import {ChatsListProps, GetChatRes} from '@/Types';
+import {ChatsListProps} from '@/Types';
 import {ChatListItem} from '../ChatsListItem/ChatListItem';
 import {socket} from '@/Pages/Authorized';
 
-export function ChatsList({messagesChats}: ChatsListProps) {
-  const [chats, setChats] = useState<GetChatRes[] | []>([]);
+export function ChatsList({findMessageData}: ChatsListProps) {
   const [getData, {data, isFetching}] = useLazyGetChatsQuery();
 
   useEffect(() => {
@@ -15,19 +16,17 @@ export function ChatsList({messagesChats}: ChatsListProps) {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (!isFetching && data) setChats(data);
-  }, [isFetching]);
-
   return (
     <ul className="chats-list">
-      {messagesChats
-        ? messagesChats.map(el => (
+      {findMessageData
+        ? findMessageData.map(el => (
             <li key={el._id}>
               <ChatListItem _id={el.chatId} user={el.owner} messages={el} />
             </li>
           ))
-        : chats.map(el => (
+        : data &&
+          !isFetching &&
+          data.map(el => (
             <li key={el._id}>
               <ChatListItem
                 _id={el._id}

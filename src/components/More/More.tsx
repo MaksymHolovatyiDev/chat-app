@@ -1,15 +1,18 @@
+import './More.styled.css';
+
 import {useState} from 'react';
 import {ReactSVG} from 'react-svg';
-import MoreSvg from '@assets/more-horizontal.svg';
-import {useDeleteMessageMutation} from '@/Redux/operations';
+import MoreSvg from '@assets/icons/more-horizontal.svg';
+import {useLazyDeleteMessageQuery} from '@/Redux/operations';
 import {useDispatch} from 'react-redux';
 import {setEdit} from '@/Redux/Edit/Edit';
+import {MoreOptionsButton} from '../MoreOptionsButton/MoreOptionsButton';
 
 export function More({id, text}: {id: string; text: string}) {
   const [showOptions, setShowOptions] = useState(false);
   const dispatch = useDispatch();
 
-  const [deleteMessage] = useDeleteMessageMutation();
+  const [deleteMessage] = useLazyDeleteMessageQuery();
 
   const onMoreClick = () => {
     setShowOptions(prevState => !prevState);
@@ -40,18 +43,11 @@ export function More({id, text}: {id: string; text: string}) {
       </button>
       {showOptions && (
         <div className="more__options">
-          <button
-            type="button"
-            onClick={onEditButtonClick}
-            className="more__button more__options-button ">
-            Edit
-          </button>
-          <button
-            type="button"
-            onClick={onDeleteButtonClick}
-            className="more__button more__options-button ">
-            Delete
-          </button>
+          <MoreOptionsButton text="Edit" clickFunction={onEditButtonClick} />
+          <MoreOptionsButton
+            text="Delete"
+            clickFunction={onDeleteButtonClick}
+          />
         </div>
       )}
     </div>

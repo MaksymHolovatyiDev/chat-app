@@ -1,11 +1,12 @@
+import './ChatListItem.styled.css';
+
 import dayjs from 'dayjs';
 
 import {ChatListItemProps} from '@/Types';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
 import {setChat} from '@/Redux/Chat/Chat';
-import {getChat} from '@/Redux/Chat/Chat.selectors';
-import {getId} from '@/Redux/User/User.selectors';
+import {useReduxData} from '@/hooks';
 
 export function ChatListItem({
   _id,
@@ -14,13 +15,11 @@ export function ChatListItem({
   unreadMessages,
   unreadUser,
 }: ChatListItemProps) {
-  const userId = useSelector(getId);
   const dispatch = useDispatch();
-  const chat = useSelector(getChat);
+  const {chat, userId} = useReduxData();
   const selected = chat === _id;
 
   const onChatClick = () => dispatch(setChat(_id));
-
   return (
     <div
       className={`chat-list-item ${selected && 'chat-list-item--selected'}`}

@@ -1,16 +1,13 @@
-import {ReactSVG} from 'react-svg';
-import AttachSvg from '@assets/attach.svg';
-import MoreSvg from '@assets/more.svg';
+import './ChatHeaderButtons.styled.css';
+import AttachSvg from '@assets/icons/attach.svg';
+import MoreSvg from '@assets/icons/more.svg';
+import {ChatHeaderMainButton} from '../ChatHeaderMainButton/ChatHeaderMainButton';
 
 export function ChatHeaderButtons() {
   return (
     <div className="chat-header__user-container">
-      <button type="button" className="chat-header__button">
-        <ReactSVG src={AttachSvg} className="side-panel___svg" />
-      </button>
-      <button type="button" className="chat-header__button">
-        <ReactSVG src={MoreSvg} className="side-panel___svg" />
-      </button>
+      <ChatHeaderMainButton icon={AttachSvg} />
+      <ChatHeaderMainButton icon={MoreSvg} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import './AuthForm.styles.css';
 import {Formik, Form, Field} from 'formik';
 import {MainRoutes, SignIn, SignUp} from '@/environment';
 import {useLocation} from 'react-router-dom';

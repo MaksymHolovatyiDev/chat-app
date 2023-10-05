@@ -1,3 +1,4 @@
+import './Auth.styles.css';
 import {AuthTitle} from '../AuthTitle/AuthTitle';
 import {AuthForm} from '../AuthForm/AuthForm';
 

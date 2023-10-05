@@ -1,0 +1,66 @@
+.main-chat-input__buttons-wrapper {
+  position: relative;
+
+  margin-left: 21px;
+  margin-right: 21px;
+}
+
+.main-chat-input__add-buttons {
+  height: 40px;
+  width: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(#7cb8f7, #2a8bf2);
+
+  border-radius: 100%;
+
+  cursor: pointer;
+}
+
+.main-chat-input__buttons-wrapper:hover
+  .main-chat-input__buttons-container--inner {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.main-chat-input__buttons-container {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  transform: translate(-25%, -100%);
+
+  padding-bottom: 14px;
+
+  overflow: hidden;
+}
+
+.main-chat-input__buttons-container--inner {
+  display: flex;
+
+  flex-direction: column;
+  gap: 10px;
+
+  height: 0;
+  width: 0;
+  opacity: 0;
+
+  transform: translateY(110%);
+  transition: transform 250ms ease-in-out, opacity 250ms ease-in-out,
+    width 250ms ease-in-out, height 250ms ease-in-out;
+}
+
+.main-chat-input__button--pointer {
+  cursor: pointer;
+}
+
+.main-chat-input__input--none {
+  display: none;
+}

@@ -1,9 +1,10 @@
+import './SidePanelNavigation.styles.css';
 import {resetUser} from '@/Redux/User/User';
 import {MainRoutes, navigationData} from '@/environment';
 import {useDispatch} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {ReactSVG} from 'react-svg';
-import LogOutSvg from '@assets/power.svg';
+import LogOutSvg from '@assets/icons/power.svg';
 
 export function SidePanelNavigation() {
   const pathname = useLocation().pathname;

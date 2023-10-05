@@ -1,12 +1,11 @@
 import '@/App.css';
 
-import {useSelector} from 'react-redux';
-import {getToken} from '@/Redux/User/User.selectors';
 import {UserAuth} from '@/Pages/UserAuth';
 import {Authorized} from '@/Pages/Authorized';
+import {useReduxData} from '@/hooks';
 
 function App() {
-  const token = useSelector(getToken);
+  const {token} = useReduxData();
 
   return token ? <Authorized /> : <UserAuth />;
 }

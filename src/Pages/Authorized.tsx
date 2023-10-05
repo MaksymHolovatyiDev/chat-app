@@ -3,14 +3,15 @@ import {io} from 'socket.io-client';
 import {Routes, Route} from 'react-router-dom';
 import {SidePanel} from '@components/SidePanel/SidePanel';
 import {Chat} from '@components/Chat/Chat';
-import {MainRoutes, defaultUrl} from '@/environment';
-import {useSelector} from 'react-redux';
-import {getId} from '@/Redux/User/User.selectors';
+import {MainRoutes} from '@/environment';
+import { useReduxData } from '@/hooks';
 
-export let socket = io(defaultUrl, {autoConnect: false});
+const defaultUrl = import.meta.env.VITE_DEFAULT_URL;
+
+export const socket = io(defaultUrl, {autoConnect: false});
 
 export function Authorized() {
-  const userId = useSelector(getId);
+  const {userId} = useReduxData();
 
   useEffect(() => {
     socket.auth = {userId};

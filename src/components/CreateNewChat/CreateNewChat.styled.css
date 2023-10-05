@@ -1,0 +1,38 @@
+.create-chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-chat__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-chat__text {
+  color: #0d1c2e;
+  font-weight: medium;
+  font-size: 36px;
+  line-height: 1.38;
+}
+
+.create-chat__sub-text {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #707c97;
+  font-weight: medium;
+  font-size: 18px;
+  line-height: 0.69;
+}
+
+.create-chat__container--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 15px;
+}

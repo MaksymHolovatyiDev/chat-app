@@ -1,11 +1,9 @@
-import GridSvg from '@assets/grid.svg';
-import ChatSvg from '@assets/chat.svg';
-import PersonSvg from '@assets/person.svg';
-import BellSvg from '@assets/bell.svg';
-import CalendarSvg from '@assets/calendar.svg';
-import SettingsSvg from '@assets/settings.svg';
-
-export const defaultUrl = 'https://chat-app-back-81ef9e6d09b6.herokuapp.com';
+import GridSvg from '@assets/icons/grid.svg';
+import ChatSvg from '@assets/icons/chat.svg';
+import PersonSvg from '@assets/icons/person.svg';
+import BellSvg from '@assets/icons/bell.svg';
+import CalendarSvg from '@assets/icons/calendar.svg';
+import SettingsSvg from '@assets/icons/settings.svg';
 
 export enum MainRoutes {
   SignIn = '/SignIn',

@@ -1,0 +1,40 @@
+.reply {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: white;
+
+  border-top: 2px solid #707c9726;
+  padding: 0 10px;
+}
+
+.reply__text {
+  max-width: 400px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reply__button {
+  position: absolute;
+
+  top: 3px;
+  right: 5px;
+
+  background-color: transparent;
+
+  border: 0;
+  padding: 0;
+
+  transition: opacity 250ms ease-in-out;
+}
+
+.reply__button:hover,
+.reply__button:focus {
+  opacity: 0.5;
+
+  outline: none;
+}

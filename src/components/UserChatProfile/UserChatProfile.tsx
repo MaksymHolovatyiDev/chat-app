@@ -1,6 +1,7 @@
+import './UserChatProfile.styled.css';
 import {UserChatProfileProps} from '@/Types';
 import dayjs from 'dayjs';
-import UserAvatar from '@assets/user.webp';
+import UserAvatar from '@assets/images/user.webp';
 
 export function UserChatProfile({
   online,
@@ -23,7 +24,7 @@ export function UserChatProfile({
           {name}
         </p>
         <p
-          className={`chat-list-item__text--line-height chat-list-item__text--online ${
+          className={`chat-list-item__text--line-height chat-list-item__text--online  ${
             selected && 'main__text--white'
           }`}>
           {online ? 'online' : 'last online ' + dayjs(lastOnline).fromNow()}

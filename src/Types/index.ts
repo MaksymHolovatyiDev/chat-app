@@ -6,6 +6,7 @@ export interface Message {
   delivered: boolean;
   read: boolean;
   reply: string[];
+  image: string;
 }
 
 export interface UsersData {
@@ -27,6 +28,7 @@ export interface SendMessageReq {
   to: string;
   message: string;
   reply: string[];
+  image: any;
 }
 
 export interface SendMessageRes {
@@ -44,12 +46,8 @@ export interface CreateNewChatReq {
   chatUserId: string;
 }
 
-export interface CreateNewChatSearchProps {
-  setMessagesChats: (data: FindByMessageProps[] | [] | null) => void;
-}
-
 export interface ChatsListProps {
-  messagesChats: FindByMessageProps[] | [] | null;
+  findMessageData: FindByMessageProps[] | [] | undefined;
 }
 
 export interface ChatListItemProps {
@@ -71,4 +69,13 @@ export interface FindByMessageProps {
 export interface UpdateMessageReq {
   messageId: string;
   text: string;
+}
+
+export interface SubmitValue {
+  message: string;
+}
+
+export interface MoreOptionsButtonProps {
+  text: string;
+  clickFunction: any;
 }

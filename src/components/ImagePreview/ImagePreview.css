@@ -1,0 +1,44 @@
+.image-preview__container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-top: 2px solid #707c9726;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.image-preview__wrapper {
+  position: relative;
+
+  height: fit-content;
+  width: fit-content;
+}
+
+.image-preview__button {
+  position: absolute;
+
+  top: -10px;
+  right: -10px;
+
+  background-color: transparent;
+
+  border: 0;
+  padding: 0;
+
+  transition: opacity 250ms ease-in-out;
+}
+
+.image-preview__button:hover,
+.image-preview__button:focus {
+  opacity: 0.2;
+
+  outline: none;
+}
+
+.image-preview__image {
+  max-height: 60px;
+  max-width: 60px;
+}

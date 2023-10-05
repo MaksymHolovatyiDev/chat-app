@@ -1,11 +1,11 @@
-import {getName} from '@/Redux/User/User.selectors';
-import {useSelector} from 'react-redux';
+import './SidePanelUser.styles.css';
 import {ReactSVG} from 'react-svg';
-import UserAvatar from '@assets/user.webp';
-import Chevron from '@assets/chevron-down.svg';
+import UserAvatar from '@assets/images/user.webp';
+import Chevron from '@assets/icons/chevron-down.svg';
+import {useReduxData} from '@/hooks';
 
 export function SidePanelUser() {
-  const userName = useSelector(getName);
+  const {name: userName} = useReduxData();
 
   return (
     <div>

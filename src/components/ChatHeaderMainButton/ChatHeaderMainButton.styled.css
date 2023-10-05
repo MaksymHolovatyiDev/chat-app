@@ -1,0 +1,28 @@
+.chat-header__button {
+  height: 52px;
+  width: 52px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+
+  border: none;
+  border-radius: 100%;
+
+  box-shadow: 0 0 13px -5px #707c97;
+  transition: background-color 250ms ease-in-out;
+}
+
+.chat-header__button:hover,
+.chat-header__button:focus {
+  background-color: #2a8bf2;
+
+  outline: none;
+}
+
+.chat-header__button:hover svg,
+.chat-header__button:focus svg {
+  fill: white;
+}

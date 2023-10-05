@@ -1,3 +1,4 @@
+import './SidePanel.styles.css';
 import {SidePanelNavigation} from '../SidePanelNavigation/SidePanelNavigation';
 import {SidePanelUser} from '../SidePanleUser/SidePanelUser';
 

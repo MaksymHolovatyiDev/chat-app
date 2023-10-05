@@ -1,0 +1,17 @@
+.side-panel {
+  height: 100vh;
+  width: 100%;
+  max-width: 290px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 75px;
+
+  background-color: white;
+
+  box-shadow: -20px 0 95px #707c97;
+
+  padding: 86px 0 49px 0;
+
+  overflow-y: auto;
+}

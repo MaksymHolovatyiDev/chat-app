@@ -1,3 +1,5 @@
+import './UsersListModal.styled.css';
+
 import {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -6,11 +8,11 @@ import {
   useCreateNewChatMutation,
   useGetAllUsersQuery,
 } from '@/Redux/operations';
-import {useDispatch, useSelector} from 'react-redux';
-import {getId} from '@/Redux/User/User.selectors';
+import {useDispatch } from 'react-redux';
 import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
 import {setChat} from '@/Redux/Chat/Chat';
 import {Notify} from 'notiflix';
+import {useReduxData} from '@/hooks';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -27,7 +29,7 @@ const style = {
 export function UsersListModal({open, setOpen}: any) {
   const {data, isSuccess} = useGetAllUsersQuery();
   const dispatch = useDispatch();
-  const userId = useSelector(getId);
+  const {userId} = useReduxData();
 
   const [
     createChat,

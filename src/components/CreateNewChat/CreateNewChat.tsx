@@ -1,17 +1,16 @@
+import './CreateNewChat.styled.css';
 import {useState} from 'react';
 import {ReactSVG} from 'react-svg';
 import {CreateNewChatSearch} from '../CreateNewChatSearch/CreateNewChatSearch';
 import {ChatsList} from '../ChatsList/ChatsList';
 import {UsersListModal} from '../UsersListModal/UsersListModal';
-import {FindByMessageProps} from '@/Types';
-import ChevronSvg from '@assets/chevron-down.svg';
-import PlusSvg from '@assets/plus.svg';
+import ChevronSvg from '@assets/icons/chevron-down.svg';
+import PlusSvg from '@assets/icons/plus.svg';
+import {useLazyFindByMessageQuery} from '@/Redux/operations';
 
 export function CreateNewChat() {
   const [open, setOpen] = useState(false);
-  const [messagesChats, setMessagesChats] = useState<
-    FindByMessageProps[] | [] | null
-  >(null);
+  const [findChatsByMessage, {data}] = useLazyFindByMessageQuery();
 
   const onButtonClick = () => {
     setOpen(true);
@@ -38,8 +37,8 @@ export function CreateNewChat() {
           Create New Chat
         </button>
       </div>
-      <CreateNewChatSearch setMessagesChats={setMessagesChats} />
-      <ChatsList messagesChats={messagesChats} />
+      <CreateNewChatSearch findChatsByMessage={findChatsByMessage} />
+      <ChatsList findMessageData={data} />
       {open && <UsersListModal open={open} setOpen={setOpen} />}
     </div>
   );

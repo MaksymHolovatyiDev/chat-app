@@ -2,17 +2,17 @@ import axios from 'axios';
 
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {defaultUrl} from '@/environment';
 import {
   CreateNewChatReq,
   FindByMessageProps,
   GetChatRes,
   Message,
-  SendMessageReq,
   SendMessageRes,
   UpdateMessageReq,
   UsersData,
 } from '@/Types';
+
+const defaultUrl = import.meta.env.VITE_DEFAULT_URL;
 
 axios.defaults.baseURL = defaultUrl + '/api';
 
@@ -59,7 +59,7 @@ export const backendAPI = createApi({
       }),
     }),
 
-    SendMessage: builder.mutation<SendMessageRes, SendMessageReq>({
+    SendMessage: builder.mutation<SendMessageRes, any>({
       query: data => ({
         url: 'Chat',
         method: 'POST',
@@ -89,10 +89,17 @@ export const backendAPI = createApi({
       }),
     }),
 
-    DeleteMessage: builder.mutation<Message, string>({
+    DeleteMessage: builder.query<Message, string>({
       query: id => ({
         url: `Message/${id}`,
         method: 'DELETE',
+      }),
+    }),
+
+    getMessageImage: builder.query<any, string>({
+      query: id => ({
+        url: `Message/image/${id}`,
+        responseHandler: 'content-type',
       }),
     }),
   }),
@@ -124,8 +131,9 @@ export const {
   useLazyGetChatByIdQuery,
   useLazyGetChatsQuery,
   useLazyFindByMessageQuery,
+  useLazyDeleteMessageQuery,
+  useLazyGetMessageImageQuery,
   useSendMessageMutation,
   useCreateNewChatMutation,
   useUpdateMessageMutation,
-  useDeleteMessageMutation,
 } = backendAPI;

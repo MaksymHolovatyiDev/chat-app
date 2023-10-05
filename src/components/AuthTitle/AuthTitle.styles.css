@@ -1,0 +1,21 @@
+.base__title {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.38;
+
+  color: #0d1c2e;
+}
+
+.auth__title {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.auth__title--inherit {
+  color: inherit;
+}
+
+.auth__title--decoration {
+  text-decoration: underline;
+}

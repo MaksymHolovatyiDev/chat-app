@@ -1,0 +1,26 @@
+.user__image {
+  height: 86px;
+  width: 86px;
+
+  border-radius: 100%;
+}
+
+.user-name__container {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 15px;
+}
+
+.user-name__text {
+  color: #0d1c2e;
+
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 0.84;
+}
+
+.chevron-down__svg--black {
+  stroke: #0d1c2e;
+}

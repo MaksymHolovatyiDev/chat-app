@@ -1,3 +1,4 @@
+import './AuthTitle.styles.css';
 import {useLocation} from 'react-router-dom';
 import {MainRoutes} from '@/environment';
 import {Link} from 'react-router-dom';

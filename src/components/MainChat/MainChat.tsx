@@ -1,3 +1,4 @@
+import './MainChat.styles.css';
 import {useEffect, useState, useRef} from 'react';
 import {socket} from '@/Pages/Authorized';
 import {MainChatInput} from '../MainChatInput/MainChatInput';
@@ -6,17 +7,14 @@ import {ChatHeaderButtons} from '../ChatHeaderButtons/ChatHeaderButtons';
 import {UserChatProfile} from '../UserChatProfile/UserChatProfile';
 import {MainChatListItem} from '../MainChatListItem/MainChatListItem';
 import {useLazyGetChatByIdQuery} from '@/Redux/operations';
-import {useSelector} from 'react-redux';
-import {getChat} from '@/Redux/Chat/Chat.selectors';
-import {getId} from '@/Redux/User/User.selectors';
 import {Reply} from '../Reply/Reply';
+import {useReduxData} from '@/hooks';
 
 export function MainChat() {
   const chatList = useRef<any>(null);
   const [chatData, setChatData] = useState<Message[] | []>([]);
   const [userData, setUserData] = useState<UsersData | null>(null);
-  const chatId = useSelector(getChat);
-  const userId = useSelector(getId);
+  const {userId, chat: chatId} = useReduxData();
   const [getChatById, {data, isFetching}] = useLazyGetChatByIdQuery();
 
   useEffect(() => {

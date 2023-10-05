@@ -1,29 +1,71 @@
+import './MainChatInput.styled.css';
 import {
   useSendMessageMutation,
   useUpdateMessageMutation,
 } from '@/Redux/operations';
 import {Field, Form, Formik} from 'formik';
 import {ReactSVG} from 'react-svg';
-import PlusSvg from '@assets/plus.svg';
-import SmileSvg from '@assets/Smile.svg';
-import NavigationSvg from '@assets/navigation.svg';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@/Redux/store';
+import SmileSvg from '@assets/icons/Smile.svg';
+import NavigationSvg from '@assets/icons/navigation.svg';
+import {useDispatch} from 'react-redux';
 import {resetEdit} from '@/Redux/Edit/Edit';
 import {useEffect, useState} from 'react';
 import {resetReply} from '@/Redux/Reply/Reply';
+import {AddFiles} from '../AddFiles/AddFiles';
+import {SubmitValue} from '@/Types';
+import {useReduxData} from '@/hooks';
+import {ImagePreview} from '../ImagePreview/ImagePreview';
 
 export function MainChatInput({id}: {id: string}) {
   const [message, setMessage] = useState('');
   const [sendMessage] = useSendMessageMutation();
   const [updateMessage] = useUpdateMessageMutation();
+  const [image, setImage] = useState<any>(null);
   const dispatch = useDispatch();
-  const edit = useSelector((state: RootState) => state.edit);
-  const reply = useSelector((state: RootState) => state.reply);
+  const {reply, edit} = useReduxData();
 
   const onHandleChange = (evt: any, callback: any) => {
     callback(evt);
     setMessage(evt.target.value);
+  };
+
+  const updateUserMessage = (dataMessage: string) => {
+    if (dataMessage && dataMessage !== edit.text)
+      updateMessage({text: dataMessage, messageId: edit.editId});
+    dispatch(resetEdit());
+  };
+
+  const sendUserMessage = (dataMessage: string) => {
+    if (dataMessage) {
+      const formData = new FormData();
+      const replyData: any = reply.id ? [reply.id, reply.text] : [];
+
+      formData.append('message', dataMessage);
+      formData.append('to', id);
+      formData.append('reply', replyData);
+      formData.append('image', image);
+
+      sendMessage(formData);
+    }
+
+    dispatch(resetReply());
+  };
+
+  const reset = (dataMessage: string, submitting: any) => {
+    dataMessage = '';
+    setMessage('');
+    setImage(null);
+    submitting(false);
+  };
+
+  const onSubmit = (values: SubmitValue, {setSubmitting}: any) => {
+    if (edit.editId) {
+      updateUserMessage(values.message);
+    } else {
+      sendUserMessage(values.message);
+    }
+
+    reset(values.message, setSubmitting);
   };
 
   useEffect(() => {
@@ -32,31 +74,11 @@ export function MainChatInput({id}: {id: string}) {
 
   return (
     <div className="main-chat-input">
-      <Formik
-        initialValues={{message}}
-        onSubmit={(values, {setSubmitting}) => {
-          if (edit.editId) {
-            if (values.message && values.message !== edit.text)
-              updateMessage({text: values.message, messageId: edit.editId});
-            dispatch(resetEdit());
-          } else {
-            if (values.message)
-              sendMessage({
-                ...values,
-                to: id,
-                reply: reply.id ? [reply.id, reply.text] : [],
-              });
-            dispatch(resetReply());
-          }
-          values.message = '';
-          setMessage('');
-          setSubmitting(false);
-        }}>
+      <ImagePreview image={image} setImage={setImage} />
+      <Formik initialValues={{message}} onSubmit={onSubmit}>
         {({handleBlur, handleChange, handleSubmit, isSubmitting}) => (
           <Form className="main-chat-input__form" onSubmit={handleSubmit}>
-            <button type="button" className="main-chat-input__button">
-              <ReactSVG src={PlusSvg} className="side-panel___svg" />
-            </button>
+            <AddFiles setImage={setImage} />
 
             <Field
               as="textarea"

@@ -1,14 +1,18 @@
+import './MainChatListItem.styled.css';
+
 import dayjs from 'dayjs';
 import ReplyIcon from '@mui/icons-material/Reply';
 
 import {Message} from '@/Types';
 import {ReactSVG} from 'react-svg';
-import UserAvatar from '@assets/user.webp';
-import DoneSvg from '@assets/all-done.svg';
-import CheckmarkSvg from '@assets/checkmark.svg';
+import UserAvatar from '@assets/images/user.webp';
+import DoneSvg from '@assets/icons/all-done.svg';
+import CheckmarkSvg from '@assets/icons/checkmark.svg';
 import {More} from '../More/More';
 import {useDispatch} from 'react-redux';
 import {setReply} from '@/Redux/Reply/Reply';
+import {useLazyGetMessageImageQuery} from '@/Redux/operations';
+import {useEffect} from 'react';
 
 export function MainChatListItem({
   data,
@@ -17,12 +21,20 @@ export function MainChatListItem({
   data: Message;
   userId: string;
 }) {
+  const [
+    getImageById,
+    {data: imageData, isLoading, isSuccess, isError, error},
+  ] = useLazyGetMessageImageQuery();
   const dispatch = useDispatch();
   const isOwner = data.owner === userId;
 
   const onReplyClick = () => {
     dispatch(setReply({id: data._id, text: data.text}));
   };
+
+  useEffect(() => {
+    if (data.image) getImageById(data.image);
+  }, []);
 
   return (
     <>
@@ -49,14 +61,17 @@ export function MainChatListItem({
         )}
 
         {isOwner && <More id={data._id} text={data.text} />}
-
-        <p
-          className={`chat__text ${
-            isOwner ? 'main-chat__your-text' : 'main-chat__user-text'
-          }`}>
-          {data.text}
-        </p>
-
+        <div>
+          {isSuccess && imageData && (
+            <img src={`data:image/*;base64, ${imageData}`} alt="Chat image" />
+          )}
+          <p
+            className={`chat__text ${
+              isOwner ? 'main-chat__your-text' : 'main-chat__user-text'
+            }`}>
+            {data.text}
+          </p>
+        </div>
         {!isOwner && (
           <button
             type="button"

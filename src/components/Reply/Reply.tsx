@@ -1,10 +1,12 @@
+import './Reply.styled.css';
+
 import {resetReply} from '@/Redux/Reply/Reply';
-import {RootState} from '@/Redux/store';
+import {useReduxData} from '@/hooks';
 import CloseIcon from '@mui/icons-material/Close';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 export function Reply() {
-  const replyData = useSelector((state: RootState) => state.reply);
+  const {reply: replyData} = useReduxData();
   const dispatch = useDispatch();
 
   const onButtonClick = () => {
