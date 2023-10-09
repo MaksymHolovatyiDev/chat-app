@@ -29,18 +29,18 @@ export function MainChatInput({id}: {id: string}) {
     setMessage(evt.target.value);
   };
 
-  const updateUserMessage = (dataMessage: string) => {
-    if (dataMessage && dataMessage !== edit.text)
-      updateMessage({text: dataMessage, messageId: edit.editId});
+  const updateUserMessage = (updateMessageData: string) => {
+    if (updateMessageData && updateMessageData !== edit.text)
+      updateMessage({text: updateMessageData, messageId: edit.editId});
     dispatch(resetEdit());
   };
 
-  const sendUserMessage = (dataMessage: string) => {
-    if (dataMessage) {
+  const sendUserMessage = (sendMessageData: string) => {
+    if (sendMessageData) {
       const formData = new FormData();
       const replyData: any = reply.id ? [reply.id, reply.text] : [];
 
-      formData.append('message', dataMessage);
+      formData.append('message', sendMessageData);
       formData.append('ChatId', id);
       formData.append('reply', replyData);
       formData.append('image', image);
@@ -51,8 +51,8 @@ export function MainChatInput({id}: {id: string}) {
     dispatch(resetReply());
   };
 
-  const reset = (dataMessage: string, submitting: any) => {
-    dataMessage = '';
+  const reset = (resetMessageData: string, submitting: any) => {
+    resetMessageData = '';
     setMessage('');
     setImage(null);
     submitting(false);
