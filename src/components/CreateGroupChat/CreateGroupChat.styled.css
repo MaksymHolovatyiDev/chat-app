@@ -1,0 +1,25 @@
+.group-chat {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.group-chat__button {
+  background-color: transparent;
+
+  color: #2a8bf2;
+}
+
+.group-chat__label {
+  font-size: large;
+  font-weight: 700;
+}
+
+.group-chat__input {
+  border-radius: 12px;
+  padding: 2px 5px;
+}

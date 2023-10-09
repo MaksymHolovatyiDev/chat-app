@@ -171,3 +171,9 @@
 .main__text--white {
   color: white;
 }
+
+.modal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

@@ -1,10 +1,10 @@
 export interface Message {
   _id: string;
   text: string;
-  owner: string;
+  owner: any;
   createdAt: string;
   delivered: boolean;
-  read: boolean;
+  read: string[];
   reply: string[];
   image: string;
 }
@@ -18,10 +18,14 @@ export interface UsersData {
 
 export interface GetChatRes {
   _id: string;
-  messages: Message[];
+  chatMessage: Message[];
   users: UsersData[];
   unreadMessages: number;
-  unreadUser: string;
+  chatName: string;
+}
+
+export interface GetChatByIdRes extends GetChatRes {
+  messages: Message[];
 }
 
 export interface SendMessageReq {
@@ -38,12 +42,13 @@ export interface SendMessageRes {
 export interface UserChatProfileProps {
   online: null | string;
   name: string;
-  lastOnline: string;
+  lastOnline: string | null;
   selected?: boolean;
 }
 
 export interface CreateNewChatReq {
-  chatUserId: string;
+  chatUsersId: string[];
+  chatName?: string;
 }
 
 export interface ChatsListProps {
@@ -51,11 +56,20 @@ export interface ChatsListProps {
 }
 
 export interface ChatListItemProps {
+  users: {
+    fullName: string;
+    _id: string;
+    socketId: string | null;
+    updatedAt: string;
+  }[];
+  chatName: string;
+  chatMessage: {
+    text: string;
+    owner: string;
+    createdAt: string;
+  }[];
+  unreadMessages: number;
   _id: string;
-  user: UsersData;
-  messages: {text: string; createdAt: string};
-  unreadMessages?: number;
-  unreadUser?: string;
 }
 
 export interface FindByMessageProps {
@@ -79,3 +93,16 @@ export interface MoreOptionsButtonProps {
   text: string;
   clickFunction: any;
 }
+
+export interface CreateUserChatProps {
+  usersList: UsersData[] | undefined;
+  usersListSuccess: boolean;
+  isError: boolean;
+  createChat: any;
+}
+
+export interface CreateGroupChatProps
+  extends Pick<
+    CreateUserChatProps,
+    'createChat' | 'usersList' | 'usersListSuccess'
+  > {}

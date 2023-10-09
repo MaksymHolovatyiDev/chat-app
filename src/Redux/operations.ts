@@ -5,6 +5,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   CreateNewChatReq,
   FindByMessageProps,
+  GetChatByIdRes,
   GetChatRes,
   Message,
   SendMessageRes,
@@ -47,7 +48,7 @@ export const backendAPI = createApi({
       providesTags: ['Chats'],
     }),
 
-    GetChatById: builder.query<GetChatRes, string>({
+    GetChatById: builder.query<GetChatByIdRes, string>({
       query: id => ({
         url: `Chat/${id}`,
       }),

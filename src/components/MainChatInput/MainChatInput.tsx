@@ -41,7 +41,7 @@ export function MainChatInput({id}: {id: string}) {
       const replyData: any = reply.id ? [reply.id, reply.text] : [];
 
       formData.append('message', dataMessage);
-      formData.append('to', id);
+      formData.append('ChatId', id);
       formData.append('reply', replyData);
       formData.append('image', image);
 

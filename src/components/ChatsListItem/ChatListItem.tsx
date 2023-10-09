@@ -10,13 +10,15 @@ import {useReduxData} from '@/hooks';
 
 export function ChatListItem({
   _id,
-  messages,
-  user,
   unreadMessages,
-  unreadUser,
+  chatMessage,
+  users,
+  chatName,
 }: ChatListItemProps) {
+  const messages = chatMessage[0];
+
   const dispatch = useDispatch();
-  const {chat, userId} = useReduxData();
+  const {chat} = useReduxData();
   const selected = chat === _id;
 
   const onChatClick = () => dispatch(setChat(_id));
@@ -26,9 +28,9 @@ export function ChatListItem({
       onClick={onChatClick}>
       <div className="chat-list-item__container">
         <UserChatProfile
-          online={user.socketId}
-          name={user.fullName}
-          lastOnline={user.updatedAt}
+          online={chatName ? '' : users[0].socketId}
+          name={chatName || users[0].fullName}
+          lastOnline={chatName ? null : users[0].updatedAt}
           selected={selected}
         />
         {messages && (
@@ -49,7 +51,7 @@ export function ChatListItem({
             {messages.text}
           </p>
         )}
-        {!!unreadMessages && unreadUser === userId && (
+        {!!unreadMessages && (
           <div className="chat-list-item__new-message">
             <p className="chat-list-item__text--line-height chat-list-item__new-message--text">
               {unreadMessages}

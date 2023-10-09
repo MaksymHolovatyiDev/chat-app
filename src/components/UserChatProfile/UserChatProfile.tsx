@@ -27,7 +27,8 @@ export function UserChatProfile({
           className={`chat-list-item__text--line-height chat-list-item__text--online  ${
             selected && 'main__text--white'
           }`}>
-          {online ? 'online' : 'last online ' + dayjs(lastOnline).fromNow()}
+          {lastOnline !== null &&
+            (online ? 'online' : 'last online ' + dayjs(lastOnline).fromNow())}
         </p>
       </div>
     </div>

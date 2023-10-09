@@ -17,12 +17,14 @@ const defaultUrl = import.meta.env.VITE_DEFAULT_URL;
 export function MainChatListItem({
   data,
   userId,
+  chatName,
 }: {
   data: Message;
   userId: string;
+  chatName: string | undefined;
 }) {
   const dispatch = useDispatch();
-  const isOwner = data.owner === userId;
+  const isOwner = data.owner._id === userId;
 
   const onReplyClick = () => {
     dispatch(setReply({id: data._id, text: data.text}));
@@ -45,32 +47,41 @@ export function MainChatListItem({
             : 'main-chat__your-message-container'
         }`}>
         {!isOwner && (
-          <img
-            className="main-chat__image"
-            src={UserAvatar}
-            alt="User avatar."
-          />
+          <div>
+            <img
+              className="main-chat__image"
+              src={UserAvatar}
+              alt="User avatar."
+            />
+            {chatName && !isOwner && (
+              <p className="main-chat__user-name">
+                {data.owner.fullName.split(' ')[0]}
+              </p>
+            )}
+          </div>
         )}
 
         {isOwner && <More id={data._id} text={data.text} />}
-        <div
-          className={`main-chat__text-container ${
-            !isOwner && 'main-chat__text-container--transparent'
-          }`}>
-          {data.image && (
-            <img
-              className="main-chat__image--width"
-              src={`${defaultUrl}/api/Message/image/${data.image}`}
-              alt="Chat image"
-              loading="lazy"
-            />
-          )}
-          <p
-            className={`chat__text ${
-              isOwner ? 'main-chat__your-text' : 'main-chat__user-text'
+        <div>
+          <div
+            className={`main-chat__text-container ${
+              !isOwner && 'main-chat__text-container--transparent'
             }`}>
-            {data.text}
-          </p>
+            {data.image && (
+              <img
+                className="main-chat__image--width"
+                src={`${defaultUrl}/api/Message/image/${data.image}`}
+                alt="Chat image"
+                loading="lazy"
+              />
+            )}
+            <p
+              className={`chat__text ${
+                isOwner ? 'main-chat__your-text' : 'main-chat__user-text'
+              }`}>
+              {data.text}
+            </p>
+          </div>
         </div>
         {!isOwner && (
           <button
@@ -82,7 +93,7 @@ export function MainChatListItem({
         )}
 
         {isOwner &&
-          (data.read ? (
+          (data?.read?.length ? (
             <ReactSVG
               src={DoneSvg}
               className="side-panel___svg main-chat-input___submit main-chat-input__svg--transparent"

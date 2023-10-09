@@ -1,0 +1,29 @@
+.modal-title {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.modal-title__button {
+  font-size: large;
+
+  background-color: transparent;
+
+  padding: 0;
+  border: 0;
+}
+
+.modal-title__button--blue {
+  color: #2a8bf2;
+}
+
+.modal-title__button:hover,
+.modal-title__button:focus {
+  outline: none;
+  color: #2a8bf2;
+}

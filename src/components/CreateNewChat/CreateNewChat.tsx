@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {ReactSVG} from 'react-svg';
 import {CreateNewChatSearch} from '../CreateNewChatSearch/CreateNewChatSearch';
 import {ChatsList} from '../ChatsList/ChatsList';
-import {UsersListModal} from '../UsersListModal/UsersListModal';
+import {CreateChatModal} from '../CreateChatModal/CreateChatModal';
 import ChevronSvg from '@assets/icons/chevron-down.svg';
 import PlusSvg from '@assets/icons/plus.svg';
 import {useLazyFindByMessageQuery} from '@/Redux/operations';
@@ -39,7 +39,7 @@ export function CreateNewChat() {
       </div>
       <CreateNewChatSearch findChatsByMessage={findChatsByMessage} />
       <ChatsList findMessageData={data} />
-      {open && <UsersListModal open={open} setOpen={setOpen} />}
+      {open && <CreateChatModal open={open} setOpen={setOpen} />}
     </div>
   );
 }

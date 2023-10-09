@@ -111,6 +111,15 @@
   margin-left: auto;
 }
 
-.main-chat__image--width{
+.main-chat__image--width {
   max-width: 234px;
+}
+
+.main-chat__user-name {
+  max-width: 40px;
+
+  color: #707c97;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

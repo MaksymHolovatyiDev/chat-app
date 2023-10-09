@@ -18,9 +18,12 @@ export function MainChat() {
   const [getChatById, {data, isFetching}] = useLazyGetChatByIdQuery();
 
   useEffect(() => {
-    socket.on('read', () => {
-      if (chatId) getChatById(chatId);
+    socket.on('read', chat => {
+      getChatById(chat);
     });
+  }, []);
+
+  useEffect(() => {
     if (chatId) getChatById(chatId);
   }, [chatId]);
 
@@ -42,9 +45,9 @@ export function MainChat() {
       <div className="chat">
         <div className="chat-header">
           <UserChatProfile
-            online={userData.socketId}
-            name={userData.fullName}
-            lastOnline={userData.updatedAt}
+            online={data?.chatName ? null : userData.socketId}
+            name={data?.chatName || userData.fullName}
+            lastOnline={data?.chatName ? null : userData.updatedAt}
           />
           <ChatHeaderButtons />
         </div>
@@ -54,16 +57,20 @@ export function MainChat() {
               <li
                 key={el._id}
                 className={`${
-                  el.owner === userId
+                  el.owner._id === userId
                     ? 'main-chat__your-message'
                     : 'main-chat__user-message'
                 }`}>
-                <MainChatListItem data={el} userId={userId} />
+                <MainChatListItem
+                  data={el}
+                  chatName={data?.chatName}
+                  userId={userId}
+                />
               </li>
             ))}
           </ul>
           <Reply />
-          <MainChatInput id={userData._id} />
+          <MainChatInput id={data ? data._id : ''} />
         </div>
       </div>
     )

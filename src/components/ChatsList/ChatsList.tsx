@@ -19,9 +19,15 @@ export function ChatsList({findMessageData}: ChatsListProps) {
   return (
     <ul className="chats-list">
       {findMessageData
-        ? findMessageData.map(el => (
+        ? findMessageData.map((el: any) => (
             <li key={el._id}>
-              <ChatListItem _id={el.chatId} user={el.owner} messages={el} />
+              <ChatListItem
+                _id={el.chatId}
+                unreadMessages={0}
+                chatMessage={[el]}
+                users={el.owner}
+                chatName=""
+              />
             </li>
           ))
         : data &&
@@ -30,10 +36,10 @@ export function ChatsList({findMessageData}: ChatsListProps) {
             <li key={el._id}>
               <ChatListItem
                 _id={el._id}
-                user={el.users[0]}
-                messages={el.messages[0]}
                 unreadMessages={el.unreadMessages}
-                unreadUser={el.unreadUser}
+                chatMessage={el.chatMessage}
+                users={el.users}
+                chatName={el.chatName}
               />
             </li>
           ))}
