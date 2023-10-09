@@ -15,7 +15,7 @@ export function ChatsList({findMessageData}: ChatsListProps) {
     });
     getData();
   }, []);
-
+  console.log(data, findMessageData);
   return (
     <ul className="chats-list">
       {findMessageData
@@ -26,7 +26,7 @@ export function ChatsList({findMessageData}: ChatsListProps) {
                 unreadMessages={0}
                 chatMessage={[el]}
                 users={el.owner}
-                chatName=""
+                chatName={undefined}
               />
             </li>
           ))

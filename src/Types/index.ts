@@ -62,7 +62,7 @@ export interface ChatListItemProps {
     socketId: string | null;
     updatedAt: string;
   }[];
-  chatName: string;
+  chatName: string | undefined;
   chatMessage: {
     text: string;
     owner: string;
