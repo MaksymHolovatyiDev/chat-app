@@ -51,13 +51,6 @@ export function MainChatInput({id}: {id: string}) {
     dispatch(resetReply());
   };
 
-  const reset = (resetMessageData: string, submitting: any) => {
-    resetMessageData = '';
-    setMessage('');
-    setImage(null);
-    submitting(false);
-  };
-
   const onSubmit = (values: SubmitValue, {setSubmitting}: any) => {
     if (edit.editId) {
       updateUserMessage(values.message);
@@ -65,7 +58,10 @@ export function MainChatInput({id}: {id: string}) {
       sendUserMessage(values.message);
     }
 
-    reset(values.message, setSubmitting);
+    values.message = '';
+    setMessage('');
+    setImage(null);
+    setSubmitting(false);
   };
 
   useEffect(() => {
