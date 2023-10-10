@@ -15,7 +15,7 @@ export function ChatsList({findMessageData}: ChatsListProps) {
     });
     getData();
   }, []);
-  console.log(data, findMessageData);
+
   return (
     <ul className="chats-list">
       {findMessageData
